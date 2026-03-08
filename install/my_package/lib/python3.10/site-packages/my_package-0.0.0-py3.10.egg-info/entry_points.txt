@@ -1,3 +1,4 @@
 [console_scripts]
+hello_node = my_package.hello_node:main
 my_node = my_package.my_node:main
 
