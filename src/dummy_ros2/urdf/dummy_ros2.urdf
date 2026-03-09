@@ -99,8 +99,8 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
   <link
     name="Link2">
@@ -157,8 +157,8 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
   <link
     name="Link3">
@@ -215,8 +215,8 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
   <link
     name="Link4">
@@ -273,8 +273,8 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
   <link
     name="Link5">
@@ -331,8 +331,8 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
   <link
     name="Link6">
@@ -389,7 +389,31 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="0"
-      velocity="0" />
+      effort="100"
+      velocity="1.0" />
   </joint>
+
+  <!-- Gazebo colors (Gazebo ignores URDF <material> tags, must use <gazebo> tags) -->
+  <gazebo reference="Base_Link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link1">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link2">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link3">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link4">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link5">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Link6">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
 </robot>

@@ -1,6 +1,6 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, ExecuteProcess
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
@@ -30,15 +30,21 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description_content}],
     )
 
-    # Spawn the robot in Gazebo
-    spawn_entity_node = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        name='spawn_entity',
-        output='screen',
-        arguments=[
-            '-entity', 'dummy_ros2',
-            '-topic', '/robot_description',
+    # Spawn the robot in Gazebo (delayed to wait for Gazebo to be ready)
+    spawn_entity_node = TimerAction(
+        period=3.0,
+        actions=[
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                name='spawn_entity',
+                output='screen',
+                arguments=[
+                    '-entity', 'dummy_ros2',
+                    '-topic', '/robot_description',
+                    '-z', '0.05',
+                ],
+            )
         ],
     )
 
