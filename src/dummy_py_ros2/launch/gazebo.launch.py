@@ -5,6 +5,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 import os
+import re
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -14,6 +15,9 @@ def generate_launch_description():
     urdf_file = os.path.join(share_dir, 'urdf', 'dummy_ros2.urdf')
     with open(urdf_file, 'r') as f:
         robot_urdf = f.read()
+
+    # Remove XML declaration to avoid lxml parsing error in spawn_entity
+    #robot_urdf = re.sub(r'<\?xml[^?]*\?>\s*', '', robot_urdf)
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -37,7 +41,10 @@ def generate_launch_description():
                 'launch',
                 'gzserver.launch.py'
             ])
-        ])
+        ]),
+        launch_arguments={
+            'pause': 'true'
+        }.items()
     )
 
     gazebo_client = IncludeLaunchDescription(

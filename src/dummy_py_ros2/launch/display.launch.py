@@ -4,6 +4,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition, UnlessCondition
 import os
+import re
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -13,6 +14,9 @@ def generate_launch_description():
     urdf_file = os.path.join(share_dir, 'urdf', 'dummy_ros2.urdf')
     with open(urdf_file, 'r') as f:
         robot_urdf = f.read()
+
+    # # Remove XML declaration to avoid lxml parsing error
+    # robot_urdf = re.sub(r'<\?xml[^?]*\?>\s*', '', robot_urdf)
 
     rviz_config_file = os.path.join(share_dir, 'config', 'display.rviz')
 
